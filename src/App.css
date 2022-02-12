@@ -17,12 +17,12 @@ h2 {
 }
 .filter_container {
   transform: translateY(-10px);
-  opacity: 0;
+  visibility: hidden;
   transition: all 0.2s ease;
   height: 1rem;
 }
 .filter_container.active {
-  opacity: 1;
+  visibility: visible;
   transform: translateY(0px);
   margin-bottom: 2rem;
 }
@@ -46,10 +46,11 @@ button.active {
 h3 {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  width: fit-content;
 }
 h3 svg {
   margin-left: 0.5rem;
-  cursor: pointer;
 }
 .pagination {
   display: flex;

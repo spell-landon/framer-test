@@ -48,6 +48,11 @@ function Filter({ setActiveGenre, activeGenre, setFiltered, movies }) {
           onClick={() => setActiveGenre(18)}>
           Drama
         </button>
+        <button
+          className={activeGenre === 10751 ? 'active' : ''}
+          onClick={() => setActiveGenre(10751)}>
+          Family
+        </button>
       </div>
     </div>
   );
