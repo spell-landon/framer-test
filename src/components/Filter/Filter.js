@@ -1,9 +1,12 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { BsChevronDown } from 'react-icons/bs';
+import { motion, AnimatePresence, Toggle } from 'framer-motion';
 
 function Filter({ setActiveGenre, activeGenre, setFiltered, movies }) {
   const [menu, setMenu] = useState(false);
+  const [isOn, setIsOn] = useState(false);
+  const toggleSwitch = () => setIsOn(!isOn);
 
   useEffect(() => {
     if (activeGenre === 0) {
@@ -16,13 +19,29 @@ function Filter({ setActiveGenre, activeGenre, setFiltered, movies }) {
     setFiltered(filtered);
   }, [activeGenre]);
 
+  const variants = {
+    open: { opacity: 1, y: 0, display: 'block' },
+    closed: { opacity: 0, y: '-20px', display: 'none' },
+  };
+  const spring = {
+    type: 'spring',
+    stiffness: 700,
+    damping: 30,
+    duration: 1,
+  };
+
   return (
     <div>
       <h3 onClick={() => setMenu(!menu)}>
         Filter Search <BsChevronDown />
       </h3>
+      {/* <div className={`filter_container ${menu ? 'active' : null}`}> */}
 
-      <div className={`filter_container ${menu ? 'active' : null}`}>
+      <motion.nav
+        animate={menu ? 'open' : 'closed'}
+        variants={variants}
+        className='filter_container'>
+        <p>Genre</p>
         <button
           className={activeGenre === 0 ? 'active' : ''}
           onClick={() => setActiveGenre(0)}>
@@ -53,7 +72,11 @@ function Filter({ setActiveGenre, activeGenre, setFiltered, movies }) {
           onClick={() => setActiveGenre(10751)}>
           Family
         </button>
-      </div>
+        <p>Adult</p>
+        <div className='switch' data-isOn={isOn} onClick={toggleSwitch}>
+          <motion.div className='handle' layout transition={spring} />
+        </div>
+      </motion.nav>
     </div>
   );
 }

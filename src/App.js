@@ -15,6 +15,7 @@ function App() {
   const [activeGenre, setActiveGenre] = useState(0);
   const [totalPages, setTotalPages] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isAdult, setIsAdult] = useState(false);
 
   useEffect(() => {
     fetchPopular();
@@ -36,6 +37,7 @@ function App() {
     setCurrentPage(value);
   };
 
+
   return (
     <div className='App'>
       <h1>Popular Movies</h1>
@@ -45,7 +47,9 @@ function App() {
         activeGenre={activeGenre}
         setActiveGenre={setActiveGenre}
       />
-      <motion.div layout className='popular-movies'>
+      <motion.div
+        layout
+        className='popular-movies'>
         <AnimatePresence>
           {filtered.map((item) => {
             return <Movie key={item.id} movie={item} />;
